@@ -1,0 +1,11 @@
+var minPartitions = function(n) {
+    var p1 = n[0];
+    for(var i = 1; i< n.length; i++){
+        if(parseInt(p1) < parseInt(n[i])){
+            p1 = n[i]
+        }
+        
+    }
+    return p1;
+    
+};
