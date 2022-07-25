@@ -1,0 +1,43 @@
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+    const ans = [];
+    if(digits.length === 0){
+        return []
+    };
+    const phone={
+            "2":"abc",
+            "3":"def",
+            "4":"ghi",
+            "5":"jkl",
+            "6":"mno",
+            "7":"pqrs",
+            "8":"tuv",
+            "9":"wxyz",
+        };
+    backtrack(digits, 0, phone, [], ans);
+    return ans;
+};
+
+var backtrack = function(digits, i, phone, stringBuilder, ans){
+    if(i === digits.length){
+        if(digits.length === 1){
+            ans.push(stringBuilder[0]);  
+        }else{
+            let str = stringBuilder[0]
+            for(let i = 1; i < digits.length; i++){
+                str = str + stringBuilder[i];
+            }
+            ans.push(str);
+        }
+        return;   
+    }
+    const currStr = phone[digits[i]];
+    for(let k = 0; k < currStr.length; k++){
+        stringBuilder.push(currStr[k]);
+        backtrack(digits, i+1, phone, stringBuilder, ans);
+        stringBuilder.pop();
+    }
+}
